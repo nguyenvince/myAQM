@@ -192,7 +192,7 @@ The RGB LED and the SCD40 is connected to another set of female recepticles befo
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
-  <img src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
+  <img width="50%" height="50%" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
 </p>
   
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts, together with the battery in the back compartment:
