@@ -5,10 +5,10 @@ Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating
 ```
 ![Portable air quality monitor myAQM banner](images/photos/)
 ## Table of contents
-#### [1. Overview](#overview)
-#### [2. Hardware specifications](#hardware-specifications)
-#### [3. Hardware fabrication](#hardware-fabrication)
-#### [4. Software implementation](#software-implementation)
+#### [1. Overview](#1-overview-1)
+#### [2. Hardware specifications](#2-hardware-specifications-1)
+#### [3. Hardware fabrication](#3-hardware-fabrication-1)
+#### [4. Software implementation](#4-software-implementation-1)
   
 #### Summary of important links
 [Electronic components](#summary-of-hardware-components)
@@ -112,7 +112,7 @@ This high capacity 2500mAh Li-Po battery from Adafruit can be connected directly
   
 Alternatively, any other Li-Po battery can be used, provided it comes with a 2-pin JST PH connector.
   
-The calibration of the battery (voltage to percentage) is discussed in section [4.5. Calibrating Li-Po battery](#calibrating-li-po-battery)
+The calibration of the battery (voltage to percentage) is discussed in section [4.5. Calibrating Li-Po battery](#45-calibrating-li-po-battery)
 #### LED indicator
 This RGB LED indicator is used to display current air quality index (using US AQI) for at-a-glance information. This feature can also be used when the portable air quality monitor is not connected with an iOS/watchOS app for us to read its measurements.
   
@@ -161,7 +161,7 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
   
 ![Render of battery compartment](images/renders/...)
   
-- The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - [Mechanical Design and Assembly Guidelines for SPS30](link)
+- The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - [Mechanical Design and Assembly Guidelines for SPS30](misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf)
   
 ![Render of SPS30 sensor placement](images/renders/...)
   
@@ -191,7 +191,9 @@ The RGB LED and the SCD40 is connected to another set of female recepticles befo
   
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
-![Battery with slider switch](images/electronics/battery-with-switch.jpg)
+<p align="center">
+  <img width="50%" height="50%" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
+</p>
   
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts, together with the battery in the back compartment:
   
