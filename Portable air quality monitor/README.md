@@ -192,16 +192,20 @@ The RGB LED and the SCD40 is connected to another set of female recepticles befo
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
-  <img width="50%" height="50%" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
+  <img max-width="512px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
 </p>
   
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts, together with the battery in the back compartment:
   
-![Battery with slider switch mounted on the back of the enclosure](images/photos/...)
+<p align="center">
+  <img max-width="512px" src="images/photos/..." alt="Battery with slider switch mounted on the back of the enclosure">
+</p>
 
 Similarly, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts, with the SPS30 sensor fits snuggly in its own comparment:
   
-![PCB mounted on the front of the enclosure](images/photos/...)
+<p align="center">
+  <img max-width="512px" src="images/photos/..." alt="PCB mounted on the front of the enclosure">
+</p>
   
 Afterwards, the front cover can be mounted in place, with four M1.6 x 6mm nuts at each corner, with the LED slightly protrudes into the cutout on the front cover:
 
