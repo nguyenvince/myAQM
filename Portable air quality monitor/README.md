@@ -189,37 +189,37 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
   
 <p align="center">
   <img width="512px" src="images/renders/battery-comparment.png" alt="Render of battery compartment">
-    <i>The battery is placed in a separate partition to avoid overheating other components</i>
+    <br/><i>The battery is placed in a separate partition to avoid overheating other components</i>
 </p>
   
   
 <p align="center">
   <img width="512px" src="images/renders/components.png" alt="Render of ESP32 placement relative to the PCB">
-  <i>Similarly, the ESP32 board is placed at the highest position (as heat rises)</i>
+  <br/><i>Similarly, the ESP32 board is placed at the highest position (as heat rises)</i>
 </p>
   
   
 <p align="center">
   <img width="512px" src="images/renders/components-sideway.png" alt="Render of SPS30 placement relative to the PCB">
-  <i>The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - <a href="misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf">Mechanical Design and Assembly Guidelines for SPS30</a></i>
+  <br/><i>The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - <a href="misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf">Mechanical Design and Assembly Guidelines for SPS30</a></i>
 </p>
   
   
 <p align="center">
-  <img width="512px" src="images/renders/hook-and-cliphook.png" alt="Render of the hook on top and the clip on the back">
-  <i>A hook is added on top of the enclosure. A clip is added on the back of the enclosure. Both of which can be used to attach the portable air quality monitor to the users' backpack, belts, or any other personal items that they often carry around during a typical day</i>
+  <img width="512px" src="images/renders/hook-and-clip.png" alt="Render of the hook on top and the clip on the back">
+  <br/><i>A hook is added on top of the enclosure. A clip is added on the back of the enclosure. Both of which can be used to attach the portable air quality monitor to the users' backpack, belts, or any other personal items that they often carry around during a typical day</i>
 </p>
   
   
 <p align="center">
   <img width="512px" src="images/renders/slits.png" alt="Render of the slits for ventilation">
-    <i>Some perforated slits to supply fresh air</i>
+    <br/><i>Some perforated slits to supply fresh air</i>
 </p>
   
 
 <p align="center">
-  <img width="512px" src="images/photos/slits.png" alt="Photo of the slits for ventilation">
-<i>Optionally, some plastic mesh can be used to cover the slits to avoid big debris/dust particles to enter the interior</i>
+  <img width="512px" src="images/photos/..." alt="Photo of the slits for ventilation">
+<br/><i>Optionally, some plastic mesh can be used to cover the slits to avoid big debris/dust particles to enter the interior</i>
 </p>
   
 ### 3.3. Putting everything together
