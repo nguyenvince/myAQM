@@ -149,7 +149,7 @@ This component is quite self-explainatory.
 - All while achieving a highly-polished and durable MVP that is not achievable if using breadboards or protoboards
   
 <p align="center">
-  <img width="768px" src="images/pcb/myaqm-pcb-empty.jpg" alt="Custom PCB photo">
+  <img width="768px" src="images/electronics/myaqm-custom-pcb.jpg" alt="Custom PCB photo">
 </p>
 
 The custom PCB is designed using **EasyEDA**, an online editor with functionalities similar to other CAD software. The design is sent to **JLC PCB** (Shenzhen, China) for fabrication. The advantages of this approach is its fast turn-over time for quick prototyping; surface-mounted components (resistors, capacitors) and through-hole components (female recepticles) can be selected from EasyEDA and are automatically soldered on the PCB boards by JLC, which eliminates the need for additional soldering.
