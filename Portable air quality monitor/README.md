@@ -20,7 +20,9 @@ Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating
 ## 1. Overview
 This documentation details the specifications and steps necessary to build **myAQM**, a  portable personal air quality monitor **(AQM)** that can be interfaced with an iOS/watchOS application.
   
-![myAQM overview](images/photo/myaqm-overview)
+<p align="center">
+  <img width="768px" src="images/renders/overview.png" alt="myAQM overview of electronic components">
+</p>
   
 **myAQM** was designed with the following properties in mind:
 ### 1.1. User experience:
@@ -53,14 +55,12 @@ This documentation details the specifications and steps necessary to build **myA
 - Custom PCB, 3D enclosure, and some M1.6 x 6mm nuts
   
 The choice for each of these components is discussed below, with unaffiliated links for purchase.
-  
-![All the hardware components laid out](images/electronics/myaqm-all-electronic-components...)
-
+    
 ### Summary of hardware components
 | Jump to section | Description | Price* | Link
 | --- | --- | --- | --- |
-| [Adafruit ESP32](#21-adafruit-esp32-microcontroller) | Microcontroller with BLE | $19.95 | [Adafruit]() |
-| [Sensirion SPS30](#sensirion-sps30-particulate-matter) | Compact low-cost optical particulate matter sensor | $46.95 | [SparkFun]() |
+| [Adafruit ESP32](#21-adafruit-esp32-microcontroller) | Microcontroller with BLE | $19.95 | [Adafruit](https://www.adafruit.com/product/3405) |
+| [Sensirion SPS30](#sensirion-sps30-particulate-matter) | Compact low-cost optical particulate matter sensor | $46.95 | [SparkFun](https://www.sparkfun.com/products/15103) |
 | [Sensirion SCD40](#sensirion-scd40-co2-temp-and-humid) | Photoacoustic CO2 sensor, with temp and humid sensor | $49.95 | [SparkFun](https://www.sparkfun.com/products/18365) |
 | [Pololu U1V11F5](#pololu-5v-step-up-voltage-regulator-u1v11f5) | 5V step-up voltage regulator for SPS30 | $6.95 | [Pololu](https://www.pololu.com/product/2562) |
 | [Adafruit Diffused Piranha LED (pack of 10)] | Air quality index indicator | $0.995/cnt | [Adafruit](https://www.adafruit.com/product/1451) |
@@ -71,9 +71,15 @@ The choice for each of these components is discussed below, with unaffiliated li
 _*Price and availability as of Dec 2021_
 ```
 ### Schematics
-![Fritzing schematic of the electronic components of myAQM](images/diagrams/myaqm-fritzing-schematics.png)
+  
+<p align="center">
+  <img width="768px" src="images/diagrams/myaqm-fritzing-schematics.png" alt="Fritzing schematic of the electronic components of myAQM">
+</p>
+  
 ### 2.1. Adafruit ESP32 microcontroller
-![esp32 microcontroller](images/electronics/esp32.png)
+<p align="center">
+  <img width="512px" src="images/electronics/esp32.jpeg" alt="Adafruit ESP32 microcontroller">
+</p>
   
 Adafruit ESP32 Feather Board microcontroller was chosen for the portable air quality monitor for its:
 - Support of different wireless communication protocols: WiFi and Bluetooth Low-Energy (BLE)
@@ -100,7 +106,7 @@ This voltage regulator is used to step up the 3.7V nominal output (3.4V - 4.2V e
 #### Sensirion SCD40 (CO2, temp, and humid)
 <p align="center">
   <img width="512px" src="images/electronics/scd40.jpeg" alt="Sensirion SCD40 C02, temp, and humid">
-</p>![]()
+</p>
   
 **Why measuring CO2?**
   
@@ -175,38 +181,66 @@ In addition to the female recepticles that will connect to the electronic compon
 ### 3.2. Custom 3D-printed enclosure
 The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found [here](), in case any modification is needed.
   
+<p align="center">
+  <img width="768px" src="images/renders/enclosure.png" alt="Render of battery compartment">
+</p>
+  
 #### Some design choices:
-- The battery is placed in a separate partition to avoid overheating other components. Similarly, the ESP32 board is placed at the highest position (as heat rises)
   
-![Render of battery compartment](images/renders/...)
+<p align="center">
+  <img width="512px" src="images/renders/battery-comparment.png" alt="Render of battery compartment">
+</p>
+*The battery is placed in a separate partition to avoid overheating other components*
   
-- The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - [Mechanical Design and Assembly Guidelines for SPS30](misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf)
   
-![Render of SPS30 sensor placement](images/renders/...)
+<p align="center">
+  <img width="512px" src="images/renders/components.png" alt="Render of ESP32 placement relative to the PCB">
+</p>
+*Similarly, the ESP32 board is placed at the highest position (as heat rises)*
   
-- A hook is added on top of the enclosure. A clip is added on the back of the enclosure. Both of which can be used to attach the portable air quality monitor to the users' backpack, belts, or any other personal items that they often carry around during a typical day.
   
-![Render of the hook on top and the clip on the back](images/renders/...)
+<p align="center">
+  <img width="512px" src="images/renders/components-sideway.png" alt="Render of SPS30 placement relative to the PCB">
+</p>
+*The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - [Mechanical Design and Assembly Guidelines for SPS30](misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf)*
   
-- Some perforated slits to supply fresh air. Optionally, some plastic mesh can be used to cover the slits to avoid big debris/dust particles to enter the interior.
   
-![Render of the slits for ventilation](images/renders/...)
+<p align="center">
+  <img width="512px" src="images/renders/hook-and-cliphook.png" alt="Render of the hook on top and the clip on the back">
+</p>
+*A hook is added on top of the enclosure. A clip is added on the back of the enclosure. Both of which can be used to attach the portable air quality monitor to the users' backpack, belts, or any other personal items that they often carry around during a typical day*
   
-![Render of the slits for ventilation](images/photo/...)
+  
+<p align="center">
+  <img width="512px" src="images/renders/slits.png" alt="Render of the slits for ventilation">
+</p>
+*Some perforated slits to supply fresh air*
+  
+
+<p align="center">
+  <img width="512px" src="images/photos/slits.png" alt="Photo of the slits for ventilation">
+</p>
+*Optionally, some plastic mesh can be used to cover the slits to avoid big debris/dust particles to enter the interior*
   
 ### 3.3. Putting everything together
 As explained before, the design objective of the portable air quality monitor is modular and reusable. The PCB board already comes installed with the female recepticles; therefore, we only need to solder male staight headers into *most* of the sensors:
   
-![Components with the male headers soldered on](images/electronics/components-with-male-headers.jpg)
+<p align="center">
+  <img width="768px" src="images/electronics/components-with-male-headers.jpg" alt="Components with the male headers soldered on">
+</p>
 *ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom)*
   
 Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes with a JST-ZHR Cable - 5-pin x 1.5mm Pitch to Breadboard connector (spare can be found [here](https://www.sparkfun.com/products/15108)). As a work-around, for our PCB board, we trim the 5 wires and solder them into a male header so that they can be plugged into the corresponding female recepticles:
   
-![SPS30 sensor with its connector wires soldered into a male header](images/electronics/sps3-with-male-header.jpg)
+<p align="center">
+  <img width="512px" src="images/electronics/sps30-with-male-header.jpg" alt="SPS30 sensor with its connector wires soldered into a male header">
+</p>
   
 The RGB LED and the SCD40 is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to create clearance for the SCD40 sensor from the SPS30 sensor underneath, while for the LED, the second set of female recepticles brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
-![PCB with all electronic components plugged in](images/pcb/pcb-with-electronics-assembled.jpg)
+<p align="center">
+  <img width="768px" src="images/pcb/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
+</p>
   
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
