@@ -82,7 +82,9 @@ Adafruit ESP32 Feather Board microcontroller was chosen for the portable air qua
 
 ### 2.2. Environmental sensors
 #### Sensirion SPS30 (particulate matter)
-![Sensirion SPS30 particulate matter](images/electronics/...)
+<p align="center">
+  <img width="512px" src="images/electronics/sps30.jpeg" alt="Sensirion SPS30 particulate matter">
+</p>
   
 **Why measuring particulate mattter?**
 Air pollution is the 4th leading factor for premature death, claiming over 6 million lives worldwide in 2019<sup>[1]</sup>. Microscopic particulate matter smaller than 2.5 micrometers (PM2.5) is among the most hazardous forms of outdoor and indoor air pollution. PM2.5 particles can penetrate and lodge into our lungs and internal organs<sup>[2]</sup>, causing respiratory and cardiovascular diseases. It is estimated that more than 90% of the world population live in areas where annual PM2.5 concentrations exceed the guildlines put forth by the World's Heath Organization (WHO)<sup>[1]</sup>.
@@ -90,11 +92,15 @@ Air pollution is the 4th leading factor for premature death, claiming over 6 mil
 Sensirion SPS30 particulate matter sensor is chosen for its relative accuracy among other similar low-cost optical sensors and for its compactness for this highly-portable monitor. Research has indicated a good correlation between SPS30's measurements with those from reference instruments<sup>[3], [4]</sup> It comes with both I2C and UART communication protocols, which makes it extremely versatile for any application. We'll use I2C in this case.
 
 ##### Pololu 5V Step-Up Voltage Regulator U1V11F5
-![Sensirion SPS30 particulate matter](images/electronics/...)
+<p align="center">
+  <img width="512px" src="images/electronics/u1v11f5.jpg" alt="Pololu 5V Step-Up Voltage Regulator U1V11F5">
+</p>
 This voltage regulator is used to step up the 3.7V nominal output (3.4V - 4.2V experimentally) from the Li-Po battery to 5V required to power up the SPS30 sensor. It is chosen for its small size and conversion efficiency.
 
 #### Sensirion SCD40 (CO2, temp, and humid)
-![Sensirion SCD40 C02, temp, and humid](images/electronics/...)
+<p align="center">
+  <img width="512px" src="images/electronics/scd40.jpeg" alt="Sensirion SCD40 C02, temp, and humid">
+</p>![]()
   
 **Why measuring CO2?**
   
@@ -116,12 +122,16 @@ The calibration of the battery (voltage to percentage) is discussed in section [
 #### LED indicator
 This RGB LED indicator is used to display current air quality index (using US AQI) for at-a-glance information. This feature can also be used when the portable air quality monitor is not connected with an iOS/watchOS app for us to read its measurements.
   
-![US Air quality index chart](images/misc/us-aqi.png)
+<p align="center">
+  <img width="512px" src="images/misc/us-aqi.png" alt="US Air quality index chart">
+</p>
   
 **myAQM** does not come with a small LCD display on the air quality like other DIY monitors as it focuses on the visualization of the data on the iOS/watchOS app. However, users are encouraged to tailor the open-source design to their preferences.
 
 #### On/off switch
-![Sensirion SCD40 C02, temp, and humid](images/electronics/lilypad-slide-switch.jpeg)
+<p align="center">
+  <img width="512px" src="images/electronics/lilypad-slide-switch.jpeg" alt="Lilypad Slider Switch">
+</p>
   
 This component is quite self-explainatory.
   
@@ -132,7 +142,9 @@ This component is quite self-explainatory.
 - It allows for quick debugging during prototyping and re-use/re-purpose after the prototyping process of such breakout components. For example, if the CO2 sensor fails, another one can be swapped in with little effort.
 - All while achieving a highly-polished and durable MVP that is not achievable if using breadboards or protoboards
   
-![Custom PCB photo](images/pcb/myaqm-pcb-empty.jpg)
+<p align="center">
+  <img width="768px" src="images/pcb/myaqm-pcb-empty.jpg" alt="Custom PCB photo">
+</p>
 
 The custom PCB is designed using **EasyEDA**, an online editor with functionalities similar to other CAD software. The design is sent to **JLC PCB** (Shenzhen, China) for fabrication. The advantages of this approach is its fast turn-over time for quick prototyping; surface-mounted components (resistors, capacitors) and through-hole components (female recepticles) can be selected from EasyEDA and are automatically soldered on the PCB boards by JLC, which eliminates the need for additional soldering.
   
@@ -141,15 +153,22 @@ The custom PCB is designed using **EasyEDA**, an online editor with functionalit
 #### Below is an overview of the PCB design process:
   
 A graphic schematic for all the electronic components is laid out:
-![Fritzing schematic of the electronic components of myAQM](images/diagrams/myaqm-fritzing-schematics.png)
+  
+<p align="center">
+  <img width="768px" src="images/diagrams/myaqm-fritzing-schematics.png" alt="Fritzing schematic of the electronic components of myAQM">
+</p>
   
 We then design a corresponding schematic on EasyEDA, with most of the components swapped out for female recepticle parts (which can be found on [JLC PCB](https://jlcpcb.com/parts)):
   
-![Custom PCB designed in EasyEDA](images/diagrams/myaqm-easyeda-schematics.png)
+<p align="center">
+  <img width="768px" src="images/diagrams/myaqm-easyeda-schematics.png" alt="Custom PCB designed in EasyEDA">
+</p>
   
 In addition to the female recepticles that will connect to the electronic components, there are three `330Ω` resistors to limit the current going though the RGB LED (one for each color) and a `47μF` capacitor close to the voltage regulator (between `VIN` - `GND`)to prevent LC voltage spikes. The final design is a 2-layered simple PCB.
   
-![2D and 3D renders of the PCB](images/pcb/myaqm-pcb-render.png)
+<p align="center">
+  <img width="768px" src="images/pcb/myaqm-pcb-render.png" alt="2D and 3D renders of the PCB">
+</p>
   
 *2D and 3D renders of the PCB with SMT components and female recepticles soldered in place*
   
@@ -192,19 +211,19 @@ The RGB LED and the SCD40 is connected to another set of female recepticles befo
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
-  <img width="100%" max-width="768px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
+  <img width="768px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
 </p>
   
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts, together with the battery in the back compartment:
   
 <p align="center">
-  <img width="100%" max-width="768px" src="images/photos/..." alt="Battery with slider switch mounted on the back of the enclosure">
+  <img width="768px" src="images/photos/..." alt="Battery with slider switch mounted on the back of the enclosure">
 </p>
 
 Similarly, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts, with the SPS30 sensor fits snuggly in its own comparment:
   
 <p align="center">
-  <img width="100%" max-width="768px" src="images/photos/..." alt="PCB mounted on the front of the enclosure">
+  <img width="768px" src="images/photos/..." alt="PCB mounted on the front of the enclosure">
 </p>
   
 Afterwards, the front cover can be mounted in place, with four M1.6 x 6mm nuts at each corner, with the LED slightly protrudes into the cutout on the front cover:
