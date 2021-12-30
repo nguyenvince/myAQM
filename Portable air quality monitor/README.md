@@ -122,7 +122,7 @@ The sensor uses I2C protocol.
 ### 2.3. Other electronic components
 #### Li-Po battery
 <p align="center">
-  <img width="384px" src="images/electronics/lipo-battery.jpg" alt="2500mAh Li-Po Battery">
+  <img width="384px" src="images/electronics/lipo-battery.jpeg" alt="2500mAh Li-Po Battery">
 </p>
 This high capacity 2500mAh Li-Po battery from Adafruit can be connected directly to the Adafruit ESP32 board. It is also equipped with circuitry protection for our peace of mind. It can be recharged using the built-in circuit on the Adafruit ESP32 with any over-the-counter microUSB cable.
   
@@ -131,7 +131,7 @@ Alternatively, any other Li-Po battery can be used, provided it comes with a 2-p
 The calibration of the battery (voltage to percentage) is discussed in section [4.5. Calibrating Li-Po battery](#45-calibrating-li-po-battery)
 #### LED indicator
 <p align="center">
-  <img width="384px" src="images/electronics/rgb-led.jpg" alt="RGB LED Piranha">
+  <img width="384px" src="images/electronics/rgb-led.jpeg" alt="RGB LED Piranha">
 </p>
 This RGB LED indicator is used to display current air quality index (using US AQI) for at-a-glance information. This feature can also be used when the portable air quality monitor is not connected with an iOS/watchOS app for us to read its measurements.
   
