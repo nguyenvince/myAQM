@@ -13,9 +13,9 @@ Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating
 #### Summary of important links
 [Electronic components](#summary-of-hardware-components)
   
-[EasyEDA PCB design](https://oshwlab.com/vtn238/portable-air-quality-monitor_copy_copy/)
+[PCB design (EasyEDA)](https://oshwlab.com/vtn238/portable-air-quality-monitor_copy_copy/)
   
-[Enclosure design](https://github.com/myAQM/myAQM...)
+[Enclosure design (Fusion 360)](/enclosure-design-fusion-360)
 
 ## 1. Overview
 This documentation details the specifications and steps necessary to build **myAQM**, a  portable personal air quality monitor **(AQM)** that can be interfaced with an iOS/watchOS application.
@@ -89,7 +89,7 @@ Adafruit ESP32 Feather Board microcontroller was chosen for the portable air qua
 ### 2.2. Environmental sensors
 #### Sensirion SPS30 (particulate matter)
 <p align="center">
-  <img width="512px" src="images/electronics/sps30.jpeg" alt="Sensirion SPS30 particulate matter">
+  <img width="384px" src="images/electronics/sps30.jpeg" alt="Sensirion SPS30 particulate matter">
 </p>
   
 **Why measuring particulate mattter?**
@@ -100,13 +100,13 @@ Sensirion SPS30 particulate matter sensor is chosen for its relative accuracy am
 
 #### Pololu 5V Step-Up Voltage Regulator U1V11F5
 <p align="center">
-  <img width="512px" src="images/electronics/u1v11f5.jpg" alt="Pololu 5V Step-Up Voltage Regulator U1V11F5">
+  <img width="384px" src="images/electronics/u1v11f5.jpg" alt="Pololu 5V Step-Up Voltage Regulator U1V11F5">
 </p>
 This voltage regulator is used to step up the 3.7V nominal output (3.4V - 4.2V experimentally) from the Li-Po battery to 5V required to power up the SPS30 sensor. It is chosen for its small size and conversion efficiency.
 
 #### Sensirion SCD40 (CO2, temp, and humid)
 <p align="center">
-  <img width="512px" src="images/electronics/scd40.jpeg" alt="Sensirion SCD40 C02, temp, and humid">
+  <img width="384px" src="images/electronics/scd40.jpeg" alt="Sensirion SCD40 C02, temp, and humid">
 </p>
   
 **Why measuring CO2?**
@@ -121,12 +121,18 @@ The sensor uses I2C protocol.
 
 ### 2.3. Other electronic components
 #### Li-Po battery
+<p align="center">
+  <img width="384px" src="images/electronics/lipo-battery.jpg" alt="2500mAh Li-Po Battery">
+</p>
 This high capacity 2500mAh Li-Po battery from Adafruit can be connected directly to the Adafruit ESP32 board. It is also equipped with circuitry protection for our peace of mind. It can be recharged using the built-in circuit on the Adafruit ESP32 with any over-the-counter microUSB cable.
   
 Alternatively, any other Li-Po battery can be used, provided it comes with a 2-pin JST PH connector.
   
 The calibration of the battery (voltage to percentage) is discussed in section [4.5. Calibrating Li-Po battery](#45-calibrating-li-po-battery)
 #### LED indicator
+<p align="center">
+  <img width="384px" src="images/electronics/rgb-led.jpg" alt="RGB LED Piranha">
+</p>
 This RGB LED indicator is used to display current air quality index (using US AQI) for at-a-glance information. This feature can also be used when the portable air quality monitor is not connected with an iOS/watchOS app for us to read its measurements.
   
 <p align="center">
@@ -137,7 +143,7 @@ This RGB LED indicator is used to display current air quality index (using US AQ
 
 #### On/off switch
 <p align="center">
-  <img width="512px" src="images/electronics/lilypad-slide-switch.jpeg" alt="Lilypad Slider Switch">
+  <img width="384px" src="images/electronics/lilypad-slide-switch.jpeg" alt="Lilypad Slider Switch">
 </p>
   
 This component is quite self-explainatory.
