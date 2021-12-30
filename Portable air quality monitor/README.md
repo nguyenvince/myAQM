@@ -20,10 +20,6 @@ Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating
 ## 1. Overview
 This documentation details the specifications and steps necessary to build **myAQM**, a  portable personal air quality monitor **(AQM)** that can be interfaced with an iOS/watchOS application.
   
-<p align="center">
-  <img width="768px" src="images/renders/overview.png" alt="myAQM overview of electronic components">
-</p>
-  
 **myAQM** was designed with the following properties in mind:
 ### 1.1. User experience:
 - **Monitoring a comprehensive set of indoor/outdoor air quality markers**
@@ -55,7 +51,11 @@ This documentation details the specifications and steps necessary to build **myA
 - Custom PCB, 3D enclosure, and some M1.6 x 6mm nuts
   
 The choice for each of these components is discussed below, with unaffiliated links for purchase.
-    
+  
+<p align="center">
+  <img width="768px" src="images/renders/overview-label.png" alt="myAQM overview of main components">
+</p>
+  
 ### Summary of hardware components
 | Jump to section | Description | Price* | Link
 | --- | --- | --- | --- |
@@ -93,11 +93,12 @@ Adafruit ESP32 Feather Board microcontroller was chosen for the portable air qua
 </p>
   
 **Why measuring particulate mattter?**
+  
 Air pollution is the 4th leading factor for premature death, claiming over 6 million lives worldwide in 2019<sup>[1]</sup>. Microscopic particulate matter smaller than 2.5 micrometers (PM2.5) is among the most hazardous forms of outdoor and indoor air pollution. PM2.5 particles can penetrate and lodge into our lungs and internal organs<sup>[2]</sup>, causing respiratory and cardiovascular diseases. It is estimated that more than 90% of the world population live in areas where annual PM2.5 concentrations exceed the guildlines put forth by the World's Heath Organization (WHO)<sup>[1]</sup>.
   
 Sensirion SPS30 particulate matter sensor is chosen for its relative accuracy among other similar low-cost optical sensors and for its compactness for this highly-portable monitor. Research has indicated a good correlation between SPS30's measurements with those from reference instruments<sup>[3], [4]</sup> It comes with both I2C and UART communication protocols, which makes it extremely versatile for any application. We'll use I2C in this case.
 
-##### Pololu 5V Step-Up Voltage Regulator U1V11F5
+#### Pololu 5V Step-Up Voltage Regulator U1V11F5
 <p align="center">
   <img width="512px" src="images/electronics/u1v11f5.jpg" alt="Pololu 5V Step-Up Voltage Regulator U1V11F5">
 </p>
@@ -227,8 +228,9 @@ As explained before, the design objective of the portable air quality monitor is
   
 <p align="center">
   <img width="768px" src="images/electronics/components-with-male-headers.jpg" alt="Components with the male headers soldered on">
+  <br/><i>ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom)</i>
 </p>
-*ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom)*
+  
   
 Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes with a JST-ZHR Cable - 5-pin x 1.5mm Pitch to Breadboard connector (spare can be found [here](https://www.sparkfun.com/products/15108)). As a work-around, for our PCB board, we trim the 5 wires and solder them into a male header so that they can be plugged into the corresponding female recepticles:
   
@@ -239,7 +241,7 @@ Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes wit
 The RGB LED and the SCD40 is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to create clearance for the SCD40 sensor from the SPS30 sensor underneath, while for the LED, the second set of female recepticles brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
 <p align="center">
-  <img width="768px" src="images/pcb/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
+  <img width="768px" src="images/electronics/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
 </p>
   
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
@@ -321,12 +323,16 @@ where **ADC_READING** is the analog measurement from A13 pin. This has to be div
   
 However, this value does not necessarily reflects the true voltage measured with a multimeter due to ADC attenuation. To fix this issue, we plot true measured voltage vs. calculated voltage (from ADC pin) and plotted this linear regression chart for a conversion formula:
   
-![Measured true voltage vs. Calculated voltage from ADC pin plot](images/diagrams/lipo-battery-calibration-measured-vs-adc-voltage.png)
+<p align="center">
+  <img width="512px" src="images/diagrams/lipo-battery-calibration-measured-vs-adc-voltage.png" alt="Measured true voltage vs. Calculated voltage from ADC pin plot">
+</p>
   
 #### 4.5.2. Converting true voltage to percentage level
 With the true voltage (which ranges from 3.4V to 4.2V), we now proceed to correlate the battery voltages to the battery percentages. To approximate the battery percentage consumed over each hour, we divided 100% by the number of hours that the system lasts until battery dead, assuming the power consumption stays relatively constant throughout the process. We then plot this 3<sup>rd</sup> degree polynomial regression chart, which gives an excellent R<sup>2</sup> value:
   
-![True voltage vs. Battery percentage plot](images/diagrams/lipo-battery-calibration-true-voltage-vs-percentage.png)
+<p align="center">
+  <img width="512px" src="images/diagrams/lipo-battery-calibration-true-voltage-vs-percentage.png" alt="True voltage vs. Battery percentage plot">
+</p>
   
 Solving for battery percentage at any given voltage then, however, requires us to solve this 3<sup>rd</sup> degree polynomial equation on the fly, which is notoriously complicated:
 ```
