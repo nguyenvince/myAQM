@@ -3,7 +3,8 @@
 Topics covered:  
 Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating 
 ```
-![Portable air quality monitor myAQM banner](images/photos/)
+![Portable air quality monitor myAQM banner](images/electronics/pcb-with-electronics-assembled.jpg)
+
 ## Table of contents
 #### [1. Overview](#1-overview-1)
 #### [2. Hardware specifications](#2-hardware-specifications-1)
@@ -194,7 +195,7 @@ In addition to the female recepticles that will connect to the electronic compon
 The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found [here](), in case any modification is needed. As it features some complicated features, SLA printing was used to ensure maximum accuracy.
   
 <p align="center">
-  <img width="768px" src="images/renders/enclosure.png" alt="Render of the enclosure">
+  <img width="512px" src="images/renders/enclosure.png" alt="Render of the enclosure">
   <br/><i>3D render of the enclosure</i>
 </p>
   
@@ -245,7 +246,7 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
 As explained before, the design objective of the portable air quality monitor is modular and reusable. The PCB board already comes installed with the female recepticles; therefore, we only need to solder male pin headers (2.54mm/0.1in) into *most* of the sensors:
   
 <p align="center">
-  <img width="768px" src="images/electronics/components-with-male-headers.jpg" alt="Components with the male headers soldered on">
+  <img width="512px" src="images/electronics/components-with-male-headers.jpg" alt="Components with the male headers soldered on">
   <br/><i>ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom).</i>
 </p>
   
@@ -262,21 +263,21 @@ Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes wit
 The RGB LED is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
 <p align="center">
-  <img width="768px" src="images/electronics/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
+  <img width="512px" src="images/electronics/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
 </p>
   
 
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
-  <img width="768px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
+  <img width="512px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
 </p>
   
   
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts. The battery is then placed in the back compartmemt. The back compartment is designed to be bigger than the nominal size of the battery so that the battery has some room to expand. A cushioned mesh can be added to fill in the space between the battery and the back panel:
   
 <p align="center">
-  <img width="768px" src="images/electronics/back-side.jpg" alt="Battery with slider switch mounted on the back of the enclosure, with the battery in the back compartment, and some cushioned mesh to allow the battery to expand">
+  <img width="512px" src="images/electronics/back-side.jpg" alt="Battery with slider switch mounted on the back of the enclosure, with the battery in the back compartment, and some cushioned mesh to allow the battery to expand">
 </p>
   
   
@@ -289,28 +290,28 @@ Next, the 3D-printed clip can be held secured onto the back panel with a pair of
 The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at each corner:
   
 <p align="center">
-  <img width="768px" src="images/photos/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
+  <img width="512px" src="images/photos/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
 </p>
   
   
 After finishing the back of the portable air quality, we turn to assemble the front. First, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts:
   
 <p align="center">
-  <img width="768px" src="images/electronics/front-side-with-pcb.jpg" alt="PCB mounted on the front of the enclosure">
+  <img width="512px" src="images/electronics/front-side-with-pcb.jpg" alt="PCB mounted on the front of the enclosure">
 </p>
   
 
 The rest of the electronics can then be added, with the SPS30 sensor fits snuggly in its own comparment like such: 
   
 <p align="center">
-  <img width="768px" src="images/electronics/sps30-in-enclosure.jpg" alt="SPS30 in the enclosure">
+  <img width="512px" src="images/electronics/sps30-in-enclosure.jpg" alt="SPS30 in the enclosure">
 </p>
   
   
 Afterwards, the front cover can be mounted:
 
 <p align="center">
-  <img width="768px" src="images/photos/front-view.jpg" alt="View from the front panel of the portable air quality monitor">
+  <img width="512px" src="images/photos/front-view.jpg" alt="View from the front panel of the portable air quality monitor">
 </p>
   
   
