@@ -4,6 +4,7 @@ Topics covered:
 Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating 
 ```
 ![Portable air quality monitor myAQM banner](images/electronics/pcb-with-electronics-assembled.jpg)
+  
 
 ## Table of contents
 #### [1. Overview](#1-overview-1)
@@ -11,12 +12,16 @@ Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating
 #### [3. Hardware fabrication](#3-hardware-fabrication-1)
 #### [4. Software implementation](#4-software-implementation-1)
   
+
+
 #### Summary of important links
 [Electronic components](#summary-of-hardware-components)
   
 [PCB design (EasyEDA)](https://oshwlab.com/vtn238/portable-air-quality-monitor_copy_copy/)
   
 [Enclosure design (Fusion 360)](/enclosure-design-fusion-360)
+  
+
 
 ## 1. Overview
 This documentation details the specifications and steps necessary to build **myAQM**, a  portable personal air quality monitor **(AQM)** that can be interfaced with an iOS/watchOS application.
@@ -149,7 +154,7 @@ This RGB LED indicator is used to display current air quality index (using US AQ
 
 #### On/off switch
 <p align="center">
-  <img width="384px" src="images/electronics/lilypad-slide-switch.jpeg" alt="Lilypad Slider Switch">
+  <img width="256px" src="images/electronics/lilypad-slide-switch.jpeg" alt="Lilypad Slider Switch">
 </p>
   
 This component is quite self-explainatory.
@@ -213,23 +218,31 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
 </p>
   
   
+
+
 <p align="center">
   <img width="512px" src="images/renders/components.png" alt="Render of ESP32 placement relative to the PCB">
   <br/><i>Similarly, the ESP32 board is placed at the highest position (as heat rises)</i>
 </p>
   
+
+
   
 <p align="center">
   <img width="512px" src="images/renders/components-sideway.png" alt="Render of SPS30 placement relative to the PCB">
   <br/><i>The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - <a href="misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf">Mechanical Design and Assembly Guidelines for SPS30</a></i>
 </p>
   
+
+
   
 <p align="center">
   <img width="512px" src="images/renders/hook-and-clip.png" alt="Render of the hook on top and the clip on the back">
   <br/><i>A hook is added on top of the enclosure. A clip is added on the back of the enclosure. Both of which can be used to attach the portable air quality monitor to the users' backpack, belts, or any other personal items that they often carry around during a typical day</i>
 </p>
   
+
+
   
 <p align="center">
   <img width="512px" src="images/renders/slits.png" alt="Render of the slits for ventilation">
@@ -237,6 +250,8 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
 </p>
   
   
+
+
 <p align="center">
   <img width="512px" src="images/electronics/slits-with-mesh.jpg" alt="Photo of the slits for ventilation, fitted with some plastic mesh to prevent dust from getting inside">
 <br/><i>Optionally, some plastic mesh can be used to cover the slits to avoid big debris/dust particles to enter the interior</i>
@@ -253,12 +268,16 @@ As explained before, the design objective of the portable air quality monitor is
 The SCD40 sensor must be soldered into a [LONG (TALL) male header](https://www.sparkfun.com/products/10158) to create enough clearance between itself and the SPS30 sensor fitted underneath.
   
   
+
+
 Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes with a JST-ZHR Cable - 5-pin x 1.5mm Pitch to Breadboard connector (spare can be found [here](https://www.sparkfun.com/products/15108)). As a work-around, for our PCB board, we trim the 5 wires and solder them into a male header so that they can be plugged into the corresponding female recepticles:
   
 <p align="center">
   <img width="512px" src="images/electronics/sps30-with-male-header.jpg" alt="SPS30 sensor with its connector wires soldered into a male header">
 </p>
   
+
+
 
 The RGB LED is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
@@ -267,6 +286,8 @@ The RGB LED is connected to another set of female recepticles before being conne
 </p>
   
 
+
+
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
@@ -274,6 +295,8 @@ The red (positive) wire of the Li-Po battery is then soldered into the switch li
 </p>
   
   
+
+
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts. The battery is then placed in the back compartmemt. The back compartment is designed to be bigger than the nominal size of the battery so that the battery has some room to expand. A cushioned mesh can be added to fill in the space between the battery and the back panel:
   
 <p align="center">
@@ -281,18 +304,25 @@ The slider switch can then be mounted onto the back of the 3D-printed enclosure 
 </p>
   
   
+
+
 Next, the 3D-printed clip can be held secured onto the back panel with a pair of M1.6 nuts and bolts. The back panel can then be mounted with four additional M1.6 nuts:
   
 <p align="center">
   <img width="768px" src="images/photos/back-panel-with-clip.jpg" alt="The clip secured onto the back panel">
 </p>
   
+
+
+
 The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at each corner:
   
 <p align="center">
   <img width="512px" src="images/photos/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
 </p>
   
+
+
   
 After finishing the back of the portable air quality, we turn to assemble the front. First, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts:
   
@@ -301,6 +331,8 @@ After finishing the back of the portable air quality, we turn to assemble the fr
 </p>
   
 
+
+
 The rest of the electronics can then be added, with the SPS30 sensor fits snuggly in its own comparment like such: 
   
 <p align="center">
@@ -308,12 +340,16 @@ The rest of the electronics can then be added, with the SPS30 sensor fits snuggl
 </p>
   
   
+
+
 Afterwards, the front cover can be mounted:
 
 <p align="center">
   <img width="512px" src="images/photos/front-view.jpg" alt="View from the front panel of the portable air quality monitor">
 </p>
   
+
+
   
 Optionally, a ring hook can be attached like below:
   
@@ -322,8 +358,10 @@ Optionally, a ring hook can be attached like below:
 ## 4. Software implementation
 The entire Arduino project of the portable air quality monitor can be found [here](https://github.com/myAQM/myAQM/arduino-code).
   
+
 Before the project can be flashed to the ESP32, the [ESP32 Platform](https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html) should be added to the Arduino IDE and [drivers for Adafruit ESP32](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/using-with-arduino-ide) should be installed.
   
+
 This documentation assumes a basic working knowledge of the Arduino IDE platform.
   
 ### 4.1. Software overview
@@ -334,10 +372,10 @@ Two Arduino libraries are used to get measurements from SPS30 and SCD40:
 - [SparkFun SCD4x Arduino Library](https://github.com/sparkfun/SparkFun_SCD4x_Arduino_Library)
 - [Arduino library for Sensirion SPS30](https://github.com/Sensirion/arduino-sps)
 Methods to return the measurements are encapsulated in `.cpp` and `.h`. The methods are quite straight-forward as they are pulled directly from respective Arduino libraries for those Sensirion sensors.
-
+  
 ### 4.3. Implementing BLE connection
 >For tutorial on [Bluetooth Low-Energy on ESP32](https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/)
-
+  
 ### 4.4. Implementing SPIFFS permanent data storage
 >For tutorial on [SPIFFS](https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/#:~:text=The%20ESP32%20contains%20a%20Serial,like%20the%20ESP32%20flash%20memory.)
   
@@ -357,6 +395,7 @@ Functions to deal with SPIFFS tasks are located in the `.ino` file as they did n
   <br/><i>The corner of myAQM lights up while charging</i>
 </p>
   
+
 Since Li-Po batteries exhibit a non-linear relationship between voltage vs. charge, it is necessary to calibrate them to roughly extrapolate battery percentage from voltage measurement taken from ESP32. On [Adafruit ESP32 documentation](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/power-management), the battery voltage ADC pin is the A13 (35 for Arduino code).
   
 >Since the ESP32 has tons of ADC pins, we 'sacrifice' one for Lipoly battery monitoring. You can read half of the battery voltage off of A13. Don't forget to double the voltage you read, since there is a divider.
@@ -382,6 +421,7 @@ With the true voltage (which ranges from 3.4V to 4.2V), we now proceed to correl
   <img width="512px" src="images/diagrams/lipo-battery-calibration-true-voltage-vs-percentage.png" alt="True voltage vs. Battery percentage plot">
 </p>
   
+
 Solving for battery percentage at any given voltage then, however, requires us to solve this 3<sup>rd</sup> degree polynomial equation on the fly, which is notoriously complicated:
 ```
 y = ax^3 + bx^2 + cx + d
