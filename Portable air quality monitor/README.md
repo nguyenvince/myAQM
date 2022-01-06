@@ -27,7 +27,7 @@ This documentation details the specifications and steps necessary to build **myA
     - CO2 carbon dioxide
     - Thermal comfort: temperature and humidity
 - **Portable**
-    - Weighs less than ...
+    - Light weight (174 gram)
     - Full-day battery life, multiple-day if further optimized
     - Can be carried around on a backbag or other personal items with a hook / clip
 - **Communicating with an iOS/watchOS app through Bluetooth Low-Energy (BLE)**
@@ -186,10 +186,17 @@ In addition to the female recepticles that will connect to the electronic compon
 *2D and 3D renders of the PCB with SMT components and female recepticles soldered in place*
   
 ### 3.2. Custom 3D-printed enclosure
-The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found [here](), in case any modification is needed.
+The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found [here](), in case any modification is needed. As it features some complicated features, SLA printing was used to ensure maximum accuracy.
   
 <p align="center">
-  <img width="768px" src="images/renders/enclosure.png" alt="Render of battery compartment">
+  <img width="768px" src="images/renders/enclosure.png" alt="Render of the enclosure">
+  <br/><i>3D render of the enclosure</i>
+</p>
+  
+  
+<p align="center">
+  <img width="768px" src="images/photos/3d-printed-enclosure.jpg" alt="3D printed enclosure photo">
+  <br/><i>All the components of the enlcosure after 3D printed</i>
 </p>
   
 #### Some design choices:
@@ -223,19 +230,21 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
     <br/><i>Some perforated slits to supply fresh air</i>
 </p>
   
-
+  
 <p align="center">
-  <img width="512px" src="images/photos/..." alt="Photo of the slits for ventilation">
+  <img width="512px" src="images/electronics/slits-with-mesh.jpg" alt="Photo of the slits for ventilation, fitted with some plastic mesh to prevent dust from getting inside">
 <br/><i>Optionally, some plastic mesh can be used to cover the slits to avoid big debris/dust particles to enter the interior</i>
 </p>
   
 ### 3.3. Putting everything together
-As explained before, the design objective of the portable air quality monitor is modular and reusable. The PCB board already comes installed with the female recepticles; therefore, we only need to solder male staight headers into *most* of the sensors:
+As explained before, the design objective of the portable air quality monitor is modular and reusable. The PCB board already comes installed with the female recepticles; therefore, we only need to solder male pin headers (2.54mm/0.1in) into *most* of the sensors:
   
 <p align="center">
   <img width="768px" src="images/electronics/components-with-male-headers.jpg" alt="Components with the male headers soldered on">
-  <br/><i>ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom)</i>
+  <br/><i>ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom).</i>
 </p>
+  
+The SCD40 sensor must be soldered into a [LONG (TALL) male header](https://www.sparkfun.com/products/10158) to create enough clearance between itself and the SPS30 sensor fitted underneath.
   
   
 Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes with a JST-ZHR Cable - 5-pin x 1.5mm Pitch to Breadboard connector (spare can be found [here](https://www.sparkfun.com/products/15108)). As a work-around, for our PCB board, we trim the 5 wires and solder them into a male header so that they can be plugged into the corresponding female recepticles:
@@ -244,44 +253,66 @@ Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes wit
   <img width="512px" src="images/electronics/sps30-with-male-header.jpg" alt="SPS30 sensor with its connector wires soldered into a male header">
 </p>
   
-The RGB LED and the SCD40 is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to create clearance for the SCD40 sensor from the SPS30 sensor underneath, while for the LED, the second set of female recepticles brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
+
+The RGB LED is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
 <p align="center">
   <img width="768px" src="images/electronics/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
 </p>
   
+
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
   <img width="768px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
 </p>
   
-The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts, together with the battery in the back compartment:
+  
+The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts. The battery is then placed in the back compartmemt. The back compartment is designed to be bigger than the nominal size of the battery so that the battery has some room to expand. A cushioned mesh can be added to fill in the space between the battery and the back panel:
   
 <p align="center">
-  <img width="768px" src="images/photos/..." alt="Battery with slider switch mounted on the back of the enclosure">
+  <img width="768px" src="images/electronics/back-side.jpg" alt="Battery with slider switch mounted on the back of the enclosure, with the battery in the back compartment, and some cushioned mesh to allow the battery to expand">
 </p>
-
-Similarly, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts, with the SPS30 sensor fits snuggly in its own comparment:
+  
+  
+Next, the 3D-printed clip can be held secured onto the back panel with a pair of M1.6 nuts and bolts. The back panel can then be mounted with four additional M1.6 nuts:
   
 <p align="center">
-  <img width="768px" src="images/photos/..." alt="PCB mounted on the front of the enclosure">
+  <img width="768px" src="images/photos/back-panel-with-clip.jpg" alt="The clip secured onto the back panel">
 </p>
   
-Afterwards, the front cover can be mounted in place, with four M1.6 x 6mm nuts at each corner, with the LED slightly protrudes into the cutout on the front cover:
-
-![Front cover mounted on the main body enclosure](images/photos/...)
-
-Lastly, the 3D-printed clip can be held secured onto the back cover with a pair of M1.6 nuts and bolts. The back cover can then be mounted with four additional M1.6 nuts:
-
-![Back clip secured onto the back cover](images/photos/...)
+The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at each corner:
   
-![Back cover mounted on the main body enclosure](images/photos/...)
+<p align="center">
+  <img width="768px" src="images/electronics/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
+</p>
   
-Optionally, a ring hook can be installed like below:
+  
+After finishing the back of the portable air quality, we turn to assemble the front. First, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts:
+  
+<p align="center">
+  <img width="768px" src="images/electronics/front-side.jpg" alt="PCB mounted on the front of the enclosure">
+</p>
+  
 
-![Ring hook on top of the enclosure](images/photos/...)
+The rest of the electronics can then be added, with the SPS30 sensor fits snuggly in its own comparment like such: 
+  
+<p align="center">
+  <img width="768px" src="images/electronics/sps30-in-enclosure.jpg" alt="SPS30 in the enclosure">
+</p>
+  
+  
+Afterwards, the front cover can be mounted:
 
+<p align="center">
+  <img width="768px" src="images/photos/front-view.jpg" alt="View from the front panel of the portable air quality monitor">
+</p>
+  
+  
+Optionally, a ring hook can be attached like below:
+  
+![Ring hook on top of the enclosure](images/electronics/.jpg)
+  
 ## 4. Software implementation
 The entire Arduino project of the portable air quality monitor can be found [here](https://github.com/myAQM/myAQM/arduino-code).
   
