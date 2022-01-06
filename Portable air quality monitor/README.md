@@ -20,6 +20,11 @@ Arduino IDE, ESP32, BLE, 3D-printing, PCB-fabricating
 ## 1. Overview
 This documentation details the specifications and steps necessary to build **myAQM**, a  portable personal air quality monitor **(AQM)** that can be interfaced with an iOS/watchOS application.
   
+<p align="center">
+  <img width="768px" src="images/photos/myaqm.jpg" alt="A photo of myAQM - a personal portable air quality monitor">
+</p>
+  
+  
 **myAQM** was designed with the following properties in mind:
 ### 1.1. User experience:
 - **Monitoring a comprehensive set of indoor/outdoor air quality markers**
@@ -284,14 +289,14 @@ Next, the 3D-printed clip can be held secured onto the back panel with a pair of
 The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at each corner:
   
 <p align="center">
-  <img width="768px" src="images/electronics/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
+  <img width="768px" src="images/photos/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
 </p>
   
   
 After finishing the back of the portable air quality, we turn to assemble the front. First, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts:
   
 <p align="center">
-  <img width="768px" src="images/electronics/front-side.jpg" alt="PCB mounted on the front of the enclosure">
+  <img width="768px" src="images/electronics/front-side-with-pcb.jpg" alt="PCB mounted on the front of the enclosure">
 </p>
   
 
@@ -346,6 +351,11 @@ Functions to deal with SPIFFS tasks are located in the `.ino` file as they did n
 - `void readFileToUpdateBleCharacteristics(fs::FS &fs, const char * path)`: Read the data file line by line to upload the data via BLE to iOS/watchOS app.
 
 ### 4.5. Calibrating Li-Po battery
+<p align="center">
+  <img width="768px" src="images/photos/charging.jpg" alt="The corner of the device lights up while charging">
+  <br/><i>The corner of myAQM lights up while charging</i>
+</p>
+  
 Since Li-Po batteries exhibit a non-linear relationship between voltage vs. charge, it is necessary to calibrate them to roughly extrapolate battery percentage from voltage measurement taken from ESP32. On [Adafruit ESP32 documentation](https://learn.adafruit.com/adafruit-huzzah32-esp32-feather/power-management), the battery voltage ADC pin is the A13 (35 for Arduino code).
   
 >Since the ESP32 has tons of ADC pins, we 'sacrifice' one for Lipoly battery monitoring. You can read half of the battery voltage off of A13. Don't forget to double the voltage you read, since there is a divider.
