@@ -270,18 +270,16 @@ Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes wit
   <img width="512px" src="images/electronics/sps30-with-male-header.jpg" alt="SPS30 sensor with its connector wires soldered into a male header">
 </p>
   
-
-
-
+<br/><br/>
+  
 The RGB LED is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
 <p align="center">
   <img width="512px" src="images/electronics/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
 </p>
   
-
-
-
+<br/><br/>
+  
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
 <p align="center">
@@ -303,10 +301,9 @@ Next, the 3D-printed clip can be held secured onto the back panel with a pair of
 <p align="center">
   <img width="768px" src="images/photos/back-panel-with-clip.jpg" alt="The clip secured onto the back panel">
 </p>
+    
+<br/><br/>
   
-
-
-
 The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at each corner:
   
 <p align="center">
@@ -320,10 +317,9 @@ After finishing the back of the portable air quality, we turn to assemble the fr
 <p align="center">
   <img width="512px" src="images/electronics/front-side-with-pcb.jpg" alt="PCB mounted on the front of the enclosure">
 </p>
+    
+<br/><br/>
   
-
-
-
 The rest of the electronics can then be added, with the SPS30 sensor fits snuggly in its own comparment like such: 
   
 <p align="center">
@@ -364,6 +360,43 @@ Methods to return the measurements are encapsulated in `.cpp` and `.h`. The meth
   
 ### 4.3. Implementing BLE connection
 >For tutorial on [Bluetooth Low-Energy on ESP32](https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/)
+
+The table below summarizes the BLE services and their BLE characteristics that myAQM advertises:
+  
+<table>
+    <thead>
+        <tr>
+            <th>BLE Services (UUIDs)</th>
+            <th>BLE Characteristics (UUIDs)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan=4><b>Environmental Sensing Service</b> (0x181A)</td>
+            <td>Particulate Matter PM2.5 Characteristic (0x2BD6)</td>
+        </tr>
+        <tr>
+            <td rowspan=2><b>Metadata Service</b> (0x9999) (custom UUID)</td>
+            <td>Carbon Dioxide CO2 Characteristic (0x2BD6) (borrowed from Carbon Monoxide CO as CO2 doesn't have a standardized characteristic)</td>
+        </tr>
+        <tr>
+            <td><b>Battery Service</b> (0x180F)</td>
+            <td>Temperature Characteristic (0x2A6E)</td>
+        </tr>
+        <tr>
+            <td>Humidity Characteristic (0x2A6F)</td>
+        </tr>
+        <tr>
+            <td>Status Characteristic (0x9998) (custom UUID)</td>
+        </tr>
+        <tr>
+            <td>Timestamp (UNIX) Characteristic (0x9997) (custom UUID)</td>
+        </tr>
+        <tr>
+            <td>Battery Level Characteristic (0x2A19)</td>
+        </tr>
+    </tbody>
+</table>
   
 ### 4.4. Implementing SPIFFS permanent data storage
 >For tutorial on [SPIFFS](https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/#:~:text=The%20ESP32%20contains%20a%20Serial,like%20the%20ESP32%20flash%20memory.)
