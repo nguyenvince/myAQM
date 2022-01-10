@@ -376,23 +376,23 @@ The table below summarizes the BLE services and their BLE characteristics that m
             <td>Particulate Matter PM2.5 Characteristic (0x2BD6)</td>
         </tr>
         <tr>
-            <td rowspan=2><b>Metadata Service</b> (0x9999) (custom UUID)</td>
             <td>Carbon Dioxide CO2 Characteristic (0x2BD6) (borrowed from Carbon Monoxide CO as CO2 doesn't have a standardized characteristic)</td>
         </tr>
         <tr>
-            <td><b>Battery Service</b> (0x180F)</td>
-            <td>Temperature Characteristic (0x2A6E)</td>
+          <td>Temperature Characteristic (0x2A6E)</td> 
         </tr>
         <tr>
             <td>Humidity Characteristic (0x2A6F)</td>
         </tr>
         <tr>
+            <td rowspan=2><b>Metadata Service</b> (0x9999) (custom UUID)</td>
             <td>Status Characteristic (0x9998) (custom UUID)</td>
         </tr>
         <tr>
             <td>Timestamp (UNIX) Characteristic (0x9997) (custom UUID)</td>
         </tr>
         <tr>
+            <td><b>Battery Service</b> (0x180F)</td>
             <td>Battery Level Characteristic (0x2A19)</td>
         </tr>
     </tbody>
