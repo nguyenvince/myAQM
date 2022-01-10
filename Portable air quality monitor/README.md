@@ -374,8 +374,6 @@ The table below summarizes the BLE services and their BLE characteristics that m
         <tr>
             <td rowspan=4><b>Environmental Sensing Service</b> (0x181A)</td>
             <td>Particulate Matter PM2.5 Characteristic (0x2BD6)</td>
-        </tr>
-        <tr>
             <td>Carbon Dioxide CO2 Characteristic (0x2BD6) (borrowed from Carbon Monoxide CO as CO2 doesn't have a standardized characteristic)</td>
             <td>Temperature Characteristic (0x2A6E)</td>
             <td>Humidity Characteristic (0x2A6F)</td> 
