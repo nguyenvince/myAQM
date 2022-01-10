@@ -217,35 +217,35 @@ The enclosure is designed in **Fusion 360**. The Fusion 360 project can be found
     <br/><i>The battery is placed in a separate partition to avoid overheating other components</i>
 </p>
   
-<br/><br/>
+<br/>
   
 <p align="center">
   <img width="512px" src="images/renders/components.png" alt="Render of ESP32 placement relative to the PCB">
   <br/><i>Similarly, the ESP32 board is placed at the highest position (as heat rises)</i>
 </p>
   
-<br/><br/>
+<br/>
   
 <p align="center">
   <img width="512px" src="images/renders/components-sideway.png" alt="Render of SPS30 placement relative to the PCB">
   <br/><i>The SPS30 is positioned such that "Inlets should always be above outlet to avoid particles getting back from the outlet to the inlets due to gravity" - <a href="misc/PS_AN_SPS30_Mechanical_Design_and_Assembly_Guidelines_v10_D2.pdf">Mechanical Design and Assembly Guidelines for SPS30</a></i>
 </p>
   
-<br/><br/>
+<br/>
   
 <p align="center">
   <img width="512px" src="images/renders/hook-and-clip.png" alt="Render of the hook on top and the clip on the back">
   <br/><i>A hook is added on top of the enclosure. A clip is added on the back of the enclosure. Both of which can be used to attach the portable air quality monitor to the users' backpack, belts, or any other personal items that they often carry around during a typical day</i>
 </p>
   
-<br/><br/>
+<br/>
   
 <p align="center">
   <img width="512px" src="images/renders/slits.png" alt="Render of the slits for ventilation">
     <br/><i>Some perforated slits to supply fresh air</i>
 </p>
   
-<br/><br/>
+<br/>
   
 <p align="center">
   <img width="512px" src="images/electronics/slits-with-mesh.jpg" alt="Photo of the slits for ventilation, fitted with some plastic mesh to prevent dust from getting inside">
@@ -257,12 +257,10 @@ As explained before, the design objective of the portable air quality monitor is
   
 <p align="center">
   <img width="512px" src="images/electronics/components-with-male-headers.jpg" alt="Components with the male headers soldered on">
-  <br/><i>ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom).</i>
+  <br/><i>ESP32, RGB LED, Pololu 5V Step-up voltage regulator, and SCD40 CO2 sensor (left to right, top to bottom). The SCD40 sensor must be soldered into a [LONG (TALL) male header](https://www.sparkfun.com/products/10158) to create enough clearance between itself and the SPS30 sensor fitted underneath.</i>
 </p>
   
-The SCD40 sensor must be soldered into a [LONG (TALL) male header](https://www.sparkfun.com/products/10158) to create enough clearance between itself and the SPS30 sensor fitted underneath.
-  
-<br/><br/>
+<br/>
   
 Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes with a JST-ZHR Cable - 5-pin x 1.5mm Pitch to Breadboard connector (spare can be found [here](https://www.sparkfun.com/products/15108)). As a work-around, for our PCB board, we trim the 5 wires and solder them into a male header so that they can be plugged into the corresponding female recepticles:
   
@@ -270,7 +268,7 @@ Meanwhile, the SPS30 particulate matter sensor purchased from SparkFun comes wit
   <img width="512px" src="images/electronics/sps30-with-male-header.jpg" alt="SPS30 sensor with its connector wires soldered into a male header">
 </p>
   
-<br/><br/>
+<br/>
   
 The RGB LED is connected to another set of female recepticles before being connected to the recepticles soldered on the PCB. The reason is to brings it closer to the front cover of the enclosure. This is how the board looks like after everything is plugged into:
   
@@ -278,7 +276,7 @@ The RGB LED is connected to another set of female recepticles before being conne
   <img width="512px" src="images/electronics/pcb-with-electronics-assembled.jpg" alt="PCB with all electronic components plugged in">
 </p>
   
-<br/><br/>
+<br/>
   
 The red (positive) wire of the Li-Po battery is then soldered into the switch like such:
   
@@ -286,7 +284,7 @@ The red (positive) wire of the Li-Po battery is then soldered into the switch li
   <img width="512px" src="images/electronics/battery-with-switch.jpg" alt="Battery with slider switch">
 </p>
   
-<br/><br/>
+<br/>
   
 The slider switch can then be mounted onto the back of the 3D-printed enclosure with two M1.6 x 6mm nuts. The battery is then placed in the back compartmemt. The back compartment is designed to be bigger than the nominal size of the battery so that the battery has some room to expand. A cushioned mesh can be added to fill in the space between the battery and the back panel:
   
@@ -294,7 +292,7 @@ The slider switch can then be mounted onto the back of the 3D-printed enclosure 
   <img width="512px" src="images/electronics/back-side.jpg" alt="Battery with slider switch mounted on the back of the enclosure, with the battery in the back compartment, and some cushioned mesh to allow the battery to expand">
 </p>
   
-<br/><br/>
+<br/>
   
 Next, the 3D-printed clip can be held secured onto the back panel with a pair of M1.6 nuts and bolts. The back panel can then be mounted with four additional M1.6 nuts:
   
@@ -302,7 +300,7 @@ Next, the 3D-printed clip can be held secured onto the back panel with a pair of
   <img width="768px" src="images/photos/back-panel-with-clip.jpg" alt="The clip secured onto the back panel">
 </p>
     
-<br/><br/>
+<br/>
   
 The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at each corner:
   
@@ -310,7 +308,7 @@ The back panel can be mounted in the main body, with four M1.6 x 6mm nuts at eac
   <img width="512px" src="images/photos/back-view.jpg" alt="View from the back panel of the portable air quality monitor">
 </p>
   
-<br/><br/>
+<br/>
   
 After finishing the back of the portable air quality, we turn to assemble the front. First, the motherboard PCB can be secured onto the front of the 3D-printed enclosure with four M1.6 x 6mm nuts:
   
@@ -318,7 +316,7 @@ After finishing the back of the portable air quality, we turn to assemble the fr
   <img width="512px" src="images/electronics/front-side-with-pcb.jpg" alt="PCB mounted on the front of the enclosure">
 </p>
     
-<br/><br/>
+<br/>
   
 The rest of the electronics can then be added, with the SPS30 sensor fits snuggly in its own comparment like such: 
   
@@ -326,7 +324,7 @@ The rest of the electronics can then be added, with the SPS30 sensor fits snuggl
   <img width="512px" src="images/electronics/sps30-in-enclosure.jpg" alt="SPS30 in the enclosure">
 </p>
   
-<br/><br/>
+<br/>
   
 Afterwards, the front cover can be mounted:
 
@@ -334,7 +332,7 @@ Afterwards, the front cover can be mounted:
   <img width="512px" src="images/photos/front-view.jpg" alt="View from the front panel of the portable air quality monitor">
 </p>
   
-<br/><br/>
+<br/>
   
 Optionally, a ring hook can be attached like below:
   
@@ -376,7 +374,7 @@ The table below summarizes the BLE services and their BLE characteristics that m
             <td>Particulate Matter PM2.5 Characteristic (0x2BD6)</td>
         </tr>
         <tr>
-            <td>Carbon Dioxide CO2 Characteristic (0x2BD6) (borrowed from Carbon Monoxide CO as CO2 doesn't have a standardized characteristic)</td>
+            <td>Carbon Dioxide CO2 Characteristic (0x2BD6)*</td>
         </tr>
         <tr>
           <td>Temperature Characteristic (0x2A6E)</td> 
@@ -385,11 +383,11 @@ The table below summarizes the BLE services and their BLE characteristics that m
             <td>Humidity Characteristic (0x2A6F)</td>
         </tr>
         <tr>
-            <td rowspan=2><b>Metadata Service</b> (0x9999) (custom UUID)</td>
-            <td>Status Characteristic (0x9998) (custom UUID)</td>
+            <td rowspan=2><b>Metadata Service</b> (0x9999)**</td>
+            <td>Status Characteristic (0x9998)**</td>
         </tr>
         <tr>
-            <td>Timestamp (UNIX) Characteristic (0x9997) (custom UUID)</td>
+            <td>Timestamp (UNIX) Characteristic (0x9997)**</td>
         </tr>
         <tr>
             <td><b>Battery Service</b> (0x180F)</td>
@@ -397,6 +395,10 @@ The table below summarizes the BLE services and their BLE characteristics that m
         </tr>
     </tbody>
 </table>
+```
+* Technically, this is Carbon Monoxide CO UUID because CO2 doesn't have a standardized characteristic UUID
+** Custom UUIDs
+```
   
 ### 4.4. Implementing SPIFFS permanent data storage
 >For tutorial on [SPIFFS](https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/#:~:text=The%20ESP32%20contains%20a%20Serial,like%20the%20ESP32%20flash%20memory.)
