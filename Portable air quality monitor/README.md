@@ -39,7 +39,7 @@ This documentation details the specifications and steps necessary to build **myA
     - Thermal comfort: temperature and humidity
 - **Portable**
     - Light weight (174 gram)
-    - Full-day battery life, multiple-day if further optimized
+    - Full-day battery life, multiple-day if [further optimized](#46-implementing-low-power-usage-to-prolong-battery-life)
     - Can be carried around on a backbag or other personal items with a hook / clip
 - **Communicating with an iOS/watchOS app through Bluetooth Low-Energy (BLE)**
     - BLE comsumes less power than Wi-Fi
@@ -355,51 +355,74 @@ Two Arduino libraries are used to get measurements from SPS30 and SCD40:
 - [SparkFun SCD4x Arduino Library](https://github.com/sparkfun/SparkFun_SCD4x_Arduino_Library)
 - [Arduino library for Sensirion SPS30](https://github.com/Sensirion/arduino-sps)
 Methods to return the measurements are encapsulated in `.cpp` and `.h`. The methods are quite straight-forward as they are pulled directly from respective Arduino libraries for those Sensirion sensors.
-  
 ### 4.3. Implementing BLE connection
 >For tutorial on [Bluetooth Low-Energy on ESP32](https://randomnerdtutorials.com/esp32-bluetooth-low-energy-ble-arduino-ide/)
 
-The table below summarizes the BLE services and their BLE characteristics that myAQM advertises:
+The table below summarizes the BLE services and their BLE characteristics with UUIDs that **myAQM** advertises:
   
 <table>
     <thead>
         <tr>
             <th>BLE Services (UUIDs)</th>
             <th>BLE Characteristics (UUIDs)</th>
+            <th>Properties/th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td rowspan=4><b>Environmental Sensing Service</b> (0x181A)</td>
             <td>Particulate Matter PM2.5 Characteristic (0x2BD6)</td>
+            <td>READ, NOTIFY</td>
         </tr>
         <tr>
             <td>Carbon Dioxide CO2 Characteristic (0x2BD6)*</td>
+            <td>READ, NOTIFY</td>
         </tr>
         <tr>
           <td>Temperature Characteristic (0x2A6E)</td> 
+            <td>READ, NOTIFY</td>
         </tr>
         <tr>
             <td>Humidity Characteristic (0x2A6F)</td>
+            <td>READ, NOTIFY</td>
         </tr>
         <tr>
             <td rowspan=2><b>Metadata Service</b> (0x9999)**</td>
             <td>Status Characteristic (0x9998)**</td>
+            <td>READ, NOTIFY</td>
         </tr>
         <tr>
             <td>Timestamp (UNIX) Characteristic (0x9997)**</td>
+            <td>READ, WRITE, NOTIFY</td>
         </tr>
         <tr>
             <td><b>Battery Service</b> (0x180F)</td>
             <td>Battery Level Characteristic (0x2A19)</td>
+            <td>READ, NOTIFY</td>
         </tr>
     </tbody>
 </table>
+  
 ```
-* Technically, this is Carbon Monoxide CO UUID because CO2 doesn't have a standardized characteristic UUID
+* Technically, this is Carbon Monoxide's UUID because CO2 doesn't have a standardized characteristic UUID
+  
 ** Custom UUIDs
 ```
   
+Being a portable device, **myAQM** has to balance between power consumption and measurement response time. This proves to be crucial when choosing a good time interval to update the BLE characteristics and notify the iOS/watchOS app. While continuous measurement and data logging via BLE connection will instantaneously notify users of short-burst pollution event, this will severely undermine the battery life of not just the device itself but also the paired iOS/watchOS device. Therefore, **myAQM** uses multiple time intervals to determine if new measurements should be retrieved and/or notified to the iOS/watchOS app, from most frequently to least frequently excecuted:
+1. Every `MEASUREMENT_INTERVAL` (default `30s`), new readings from sensors are retrieved. The measurements are then kept track to calculate running average to smooth out noises.
+2. Every `UPDATE_CHARAC_INTERVAL` (default `60s`), the running average of the latest `UPDATE_CHARAC_INTERVAL / MEASUREMENT_INTERVAL`entries are calculated and the BLE characteristics are updated. This is the **real-time air quality reading**; however, the iOS/watchOS app will not be notified unless there is a **significant change** in air quality (either degradation or improvement). A **significant change** is defined as a change from one air quality index (AQI) category to another AQI category of this running average compared to the running average over the previous `NOTIFY_CHARAC_INTERVAL`.
+3. Every `NOTIFY_CHARAC_INTERVAL` (default `10min`), the measurements' running average is calculated and sent to the iOS/watchOS app to keep it up-to-date.
+  
+This algorithm is able to moderately preserve battery life and yield near real-time air quality measurements while promptly notify users of short-burst pollution events. It will also ensure users can access real-time air quality data if they want to (by requesting from the app interface), instead of having to wait for 10 minutes for the automatic notification from the BLE device.
+  
+All of the 3 time intervals are customizable in `configs.h`; however, `MEASUREMENT_INTERVAL` should be a multiple of 30 seconds if low-power mode is used on the SCD40 sensor (discussed [here](#46-implementing-low-power-usage-to-prolong-battery-life)). Additionally, this relationship between the 3 time intervals must be satisfied:
+```
+NOTIFY_CHARAC_INTERVAL = m * UPDATE_CHARAC_INTERVAL = n * MEASUREMENT_INTERVAL
+  
+where m, n are integers > 1
+```
+
 ### 4.4. Implementing SPIFFS permanent data storage
 >For tutorial on [SPIFFS](https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/#:~:text=The%20ESP32%20contains%20a%20Serial,like%20the%20ESP32%20flash%20memory.)
   
@@ -416,7 +439,7 @@ Functions to deal with SPIFFS tasks are located in the `.ino` file as they did n
 ### 4.5. Calibrating Li-Po battery
 <p align="center">
   <img width="768px" src="images/photos/charging.jpg" alt="The corner of the device lights up while charging">
-  <br/><i>The corner of myAQM lights up while charging</i>
+  <br/><i>The corner of **myAQM** lights up while charging</i>
 </p>
   
 
@@ -477,7 +500,15 @@ const float battery_levels[BATTERY_LEVELS_NUM] = {
 We assume a 5% increment look-up table should achieve a good memory usage while still giving users enough high-resolution data on the battery level.
 #### Remark:
 If a different battery model is used, this two-step battery calibration must be carried out again.
-### 4.6. (Alternative) Implementing WiFi connection with ThingSpeak server
+### 4.6. Implementing low-power usage to prolong battery life
+The 2500mAh battery in **myAQM** lasts for more than **40 hours** of continuous usage (paired with iOS app) thanks some minor adjustments below:
+- Underclocking the CPU: by default, the dual-core CPU runs on 240Mhz with the Arduino IDE. However, with a single line of code `setCpuFrequencyMhz(80)`, we can easily cut it in third. This results in a reduction of around **20-30mA** in supply current.  
+- Using low-power mode for the SCD40 CO2 sensor: `scd40.startLowPowerPeriodicMeasurement()`. In this mode, the sensor returns one measurement every 30 second, instead of 5 second in normal mode. This cuts supply current from 15mA to 3mA.
+- Implementing intermittent measurement for the SPS30 sensor: In this mode, the sensor first runs for 30 seconds to obtain a valid reading, then idles for another 30 seconds. One complete measurement cycle is therefore 1 minute. This cuts supply current in half, from 55mA to 23mA. Refer to [Low-Power Operation Of the SPS30 Particulate Matter Sensor](misc/Sensirion_Particulate_Matter_AppNotes_SPS30_Low_Power_Operation_D1.pdf) for further optimization.
+  
+While more aggressive solutions, such as ESP32 deep sleep and/or BLE sleep, can further increase the battery life, for our objective of a full-day battery life, the aforementioned measures suffice. A potential problem of turning on and off BlE is an increase in power consumption of the iOS/watchOS due to frequent scanning for the BLE peripheral device; thus, it was not explored in this iteration of the prototype.
+  
+### 4.7. (Alternative) Implementing WiFi connection with ThingSpeak server
 As mentioned, ESP32 is a powerful microcontroller with BLE and Wi-Fi capabilities. For any application that requires Wi-Fi as the sole/hybrid mode of communication, one can easily integrate ThingSpeak IoT platform to **myAQM** without having to set up one's own server nor database. Tutorials can be found on [Mathworks](https://www.mathworks.com/help/thingspeak/measure-arduino-wifi-signal-strength-with-esp32.html) and [RandomNerdTutorials](https://randomnerdtutorials.com/esp32-thingspeak-publish-arduino/). We are not going to discuss the actual technical implementation here; however, the only modification to the source code would be to substitute the BLE code with the Wi-Fi and ThingSpeak code, all else stay the same.
   
 ---
