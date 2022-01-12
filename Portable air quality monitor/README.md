@@ -365,39 +365,39 @@ The table below summarizes the BLE services and their BLE characteristics with U
         <tr>
             <th>BLE Services (UUIDs)</th>
             <th>BLE Characteristics (UUIDs)</th>
-            <th>Properties/th>
+            <th>Properties</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td rowspan=4><b>Environmental Sensing Service</b> (0x181A)</td>
-            <td>Particulate Matter PM2.5 Characteristic (0x2BD6)</td>
+            <td rowspan=4><a href="#431-environmental-sensing-service"><b>Environmental Sensing service</b></a> (0x181A)</td>
+            <td>Particulate Matter PM2.5 characteristic (0x2BD6)</td>
             <td>READ, NOTIFY</td>
         </tr>
         <tr>
-            <td>Carbon Dioxide CO2 Characteristic (0x2BD6)*</td>
+            <td>Carbon Dioxide CO2 characteristic (0x2BD6)*</td>
             <td>READ, NOTIFY</td>
         </tr>
         <tr>
-          <td>Temperature Characteristic (0x2A6E)</td> 
+          <td>Temperature characteristic (0x2A6E)</td> 
             <td>READ, NOTIFY</td>
         </tr>
         <tr>
-            <td>Humidity Characteristic (0x2A6F)</td>
+            <td>Humidity characteristic (0x2A6F)</td>
             <td>READ, NOTIFY</td>
         </tr>
         <tr>
-            <td rowspan=2><b>Metadata Service</b> (0x9999)**</td>
-            <td>Status Characteristic (0x9998)**</td>
+            <td rowspan=2><a href="#432-metadata-service"><b>Metadata service</b></a> (0x9999)**</td>
+            <td>Status characteristic (0x9998)**</td>
             <td>READ, NOTIFY</td>
         </tr>
         <tr>
-            <td>Timestamp (UNIX) Characteristic (0x9997)**</td>
+            <td>Timestamp (UNIX) characteristic (0x9997)**</td>
             <td>READ, WRITE, NOTIFY</td>
         </tr>
         <tr>
-            <td><b>Battery Service</b> (0x180F)</td>
-            <td>Battery Level Characteristic (0x2A19)</td>
+            <td><a href="#433-battery-service"><b>Battery service</b></a>  (0x180F)</td>
+            <td>Battery Level characteristic (0x2A19)</td>
             <td>READ, NOTIFY</td>
         </tr>
     </tbody>
@@ -409,10 +409,32 @@ The table below summarizes the BLE services and their BLE characteristics with U
 ** Custom UUIDs
 ```
   
+#### 4.3.1. Environmental Sensing service
+This BLE service contains 4 BLE characteristics that describes the air quality data:
+- Particulate matter PM2.5 (μg/m<sup>3</sup>)
+- Carbon dioxide CO2 (ppm)
+- Temperature (C)
+- Humidity (%)
+#### 4.3.2. Metadata service
+This custom BLE service contains 2 BLE characteristics:
+- **Status**: this contains a single number string to describe the timing nature of the BLE notifications that are sent to the iOS/watchOS app
+  - `STATUS_REGULAR "1"`: when BLE notifications are sent as part of the regular interval `NOTIFY_CHARAC_INTERVAL` (default `10 minute`). This will be the primary status of connection between **myAQM** and the paired iOS/watchOS app.
+  - `STATUS_URGENT "2"`: when BLE notifications are sent because of a significant change in air quality. This is to promptly inform users of real-time short-burst pollution event, before the intended regular interval. This is discussed more in-depth in [4.3.4. Timeframe of BLE Events](##434-timeframe-of-ble-events).
+  - `STATUS_HISTORY "3"`: when BLE notifications are sent as part of a BLE re-connection with the paired iOS device following a temporary disconnection from **myAQM**. The data being sent are past measurements that did not have the chance to be pushed over to the iOS device. This is discussed more in-depth in [4.4. Implementing SPIFFS data storage](#44-implementing-spiffs-data-storage).
+    
+- **Timestamp (UNIX)**: `epochTime` will be initialized during the first connection after power-on with the iOS app (with real-time data from the app). This will be used to keep track of the UNIX time of past measurements. This will only be used during historical data notifications following a BLE re-connection `STATUS_HISTORY "3"`. During real-time notifications `STATUS_REGULAR "1"` and `STATUS_URGENT "2"`, Timestamp is not sent to save bandwidth; instead, it will be obtained directly on the iOS application side.
+#### 4.3.3. Battery service
+This BLE service contains one single BLE characteristic: Battery Level characteristic.
+#### 4.3.4. Timeframe of BLE Events
 Being a portable device, **myAQM** has to balance between power consumption and measurement response time. This proves to be crucial when choosing a good time interval to update the BLE characteristics and notify the iOS/watchOS app. While continuous measurement and data logging via BLE connection will instantaneously notify users of short-burst pollution event, this will severely undermine the battery life of not just the device itself but also the paired iOS/watchOS device. Therefore, **myAQM** uses multiple time intervals to determine if new measurements should be retrieved and/or notified to the iOS/watchOS app, from most frequently to least frequently excecuted:
+  
+<p align="center">
+  <img width="512px" src="images/diagrams/BLE-chart.png" alt="View from the front panel of the portable air quality monitor">
+</p>
+  
 1. Every `MEASUREMENT_INTERVAL` (default `30s`), new readings from sensors are retrieved. The measurements are then kept track to calculate running average to smooth out noises.
-2. Every `UPDATE_CHARAC_INTERVAL` (default `60s`), the running average of the latest `UPDATE_CHARAC_INTERVAL / MEASUREMENT_INTERVAL`entries are calculated and the BLE characteristics are updated. This is the **real-time air quality reading**; however, the iOS/watchOS app will not be notified unless there is a **significant change** in air quality (either degradation or improvement). A **significant change** is defined as a change from one air quality index (AQI) category to another AQI category of this running average compared to the running average over the previous `NOTIFY_CHARAC_INTERVAL`.
-3. Every `NOTIFY_CHARAC_INTERVAL` (default `10min`), the measurements' running average is calculated and sent to the iOS/watchOS app to keep it up-to-date.
+2. Every `UPDATE_CHARAC_INTERVAL` (default `60s`), the running average of the latest `UPDATE_CHARAC_INTERVAL / MEASUREMENT_INTERVAL`entries are calculated and the BLE characteristics are updated. This is the **real-time air quality reading**; however, the iOS/watchOS app will not be notified unless there is a **significant change** in air quality (either degradation or improvement). A **significant change** is defined as a change from one air quality index (AQI) category to another AQI category of this running average compared to the running average over the previous `NOTIFY_CHARAC_INTERVAL`. Notifcations sent here have a STATUS characteristic of `STATUS_URGENT "2"`.
+3. Every `NOTIFY_CHARAC_INTERVAL` (default `10min`), the measurements' running average is calculated and sent to the iOS/watchOS app to keep it up-to-date. Notifcations sent here have a STATUS characteristic of `STATUS_REGULAR "1"`.
   
 This algorithm is able to moderately preserve battery life and yield near real-time air quality measurements while promptly notify users of short-burst pollution events. It will also ensure users can access real-time air quality data if they want to (by requesting from the app interface), instead of having to wait for 10 minutes for the automatic notification from the BLE device.
   
@@ -422,16 +444,17 @@ NOTIFY_CHARAC_INTERVAL = m * UPDATE_CHARAC_INTERVAL = n * MEASUREMENT_INTERVAL
   
 where m, n are integers > 1
 ```
-
-### 4.4. Implementing SPIFFS permanent data storage
+### 4.4. Implementing SPIFFS data storage
 >For tutorial on [SPIFFS](https://randomnerdtutorials.com/install-esp32-filesystem-uploader-arduino-ide/#:~:text=The%20ESP32%20contains%20a%20Serial,like%20the%20ESP32%20flash%20memory.)
   
 For use cases where the portable air quality monitor is not connected to the iOS/watchOS app, we need to store data locally and opportunistically upload the logged data once a reconnection is established. One solution is to use a microSD card breakout board. However, to avoid complicating the prototype at this point, we decide to use the internal memory onboard the ESP32 microcontroller instead.
   
 The onboard permanent memory is called SPIFFS, and it has 1MB memory of storage. While this might seem abysmal, it is worth noted that a record only consumes some tens of bytes. 1MB is more than enough for days of continuous logging before a re-connection is established. After all, this is only intended for when there is no connection with the phone app and not for long term storage, which will be handled by the iOS/watchOS app.
-
-Functions to deal with SPIFFS tasks are located in the `.ino` file as they did not work when being encapsulated in a seperate header file. The 4 functions are:
-- `void setup_SPIFFS()`: Initialize the SPIFFS partition, format the SPIFFS if the initialization fails (this can be deactivated via the variable `FORMAT_SPIFFS_IF_FAILED` in the `configs.h` file). To be called in the `void setup()` function in the `.ino` file.
+  
+Data will only be logged locally if a connection has been established at least once since device power, due to the fact that only then will the AQM receive datetime data from the iOS/watchOS app. Without this crucial datetime data, it has no way of knowing the real time stamp of the historical measurements (Timestamp BLE characteristic discussed earlier in [4.3.2. Metadata service](#432-metadata-service)).
+  
+Functions to deal with SPIFFS tasks are located in the `aq-monitor.ino` file as they did not work when being encapsulated in a seperate header file. The 4 functions are:
+- `void setup_SPIFFS()`: Initialize the SPIFFS partition, format the SPIFFS if the initialization fails (this can be deactivated via the variable `FORMAT_SPIFFS_IF_FAILED` in the `configs.h` file). To be called in the `void setup()` function in the `aq-monitor.ino` file.
 - `void deleteFile(fs::FS &fs, const char * path)`: Remove the temporary data file after finishing uploading the data to the iOS/watchOS app to free up space.
 - `void appendFile(fs::FS &fs, const char * path, const char * message)`: Append new measurement to `FILENAME` (can be changed in `configs.h`). This function takes the message to be appended as a `char` array.
 - `void readFileToUpdateBleCharacteristics(fs::FS &fs, const char * path)`: Read the data file line by line to upload the data via BLE to iOS/watchOS app.
